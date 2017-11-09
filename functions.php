@@ -13,18 +13,16 @@ function get_webpage($url) {
 
 function count_words($keywords = [], $content = ''){
     //Transform to lowercase + strip all html tags of corpus
-    $content = transform_lowercase(strip_tags($content));
+    $content = strtolower(strip_tags($content));
     //Loop through the keyword array, allowing for multiple words to be searched at once
+    $amounts = [];
     foreach ($keywords as $word) {
         //Count occurrence of substring within string
         $nr = substr_count($content, $word);
-        display_search_results($word, $nr);
+        $amounts[] = $nr;
     }
-}
-
-function transform_lowercase($content){
-    $lowercase_content = strtolower($content);
-    return $lowercase_content;
+    $keywords = array_combine($keywords, $amounts);
+    return $keywords;
 }
 
 function display_search_results($word, $nr){

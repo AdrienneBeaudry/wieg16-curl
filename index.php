@@ -1,5 +1,5 @@
 <?php
-
+require 'functions.php';
 $ch = curl_init("http://www.nicholassolutions.com/tutorials/php/headers.html");
 $fileName = "headers.html";
 $fp = fopen($fileName, "w");
@@ -14,4 +14,8 @@ fclose($fp);
 $keywords = ['header', 'php', 'http'];
 $content = file_get_contents($fileName);
 
-count_words($keyword, $content);
+$keywords = count_words($keywords, $content);
+
+foreach ($keywords as $keyword => $amount) {
+    display_search_results($keyword, $amount);
+}
