@@ -1,17 +1,23 @@
 <?php
 
-$ch = curl_init("https://www.milletech.se/invoicing/export/customers");
-$fileName = "customers.html";
-$fp = fopen($fileName, "w");
 
-curl_setopt($ch, CURLOPT_FILE, $fp);
-curl_setopt($ch, CURLOPT_HEADER, 0);
+function get_webpage($url) {
+    $ch = curl_init($url);
 
-curl_exec($ch);
-curl_close($ch);
-fclose($fp);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
 
 /*$keywords = ['header', 'http', 'php'];
+
+$fileName = "customers.json";
+$fp = fopen($fileName, "w");
+fclose($fp);
+
 
 $content = file_get_contents($fileName);
 $content = strip_tags($content);
