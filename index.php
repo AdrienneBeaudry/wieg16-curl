@@ -11,13 +11,7 @@ curl_exec($ch);
 curl_close($ch);
 fclose($fp);
 
-$keywords = ['header', 'http', 'php'];
-
+$keywords = ['header', 'php', 'http'];
 $content = file_get_contents($fileName);
-$content = strip_tags($content);
-$content = strtolower($content);
 
-foreach ($keywords as $word) {
-    $nr = substr_count($content, $word);
-    echo "<p><strong>$word</strong> appears <strong>$nr</strong> times in the document</p>";
-}
+count_words($keyword, $content);
