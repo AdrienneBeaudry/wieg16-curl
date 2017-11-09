@@ -12,15 +12,21 @@ function get_webpage($url) {
 }
 
 function count_words($keywords = [], $content = ''){
-    //Remove html tags from the document, to only keep content
-    $content = strip_tags($content);
-    //Since substr_count is case sensitive, transform all text to lower case to avoid skewing results
-    $content = strtolower($content);
-    //A loop that allows for an array of multiple keywords to be passed to function
+    //Transform to lowercase + strip all html tags of corpus
+    $content = transform_lowercase(strip_tags($content));
+    //Loop through the keyword array, allowing for multiple words to be searched at once
     foreach ($keywords as $word) {
-        //Counts the number of times a given substring appears in a bigger string
+        //Count occurrence of substring within string
         $nr = substr_count($content, $word);
-        //Display results
-        echo "<p><strong>$word</strong> appears <strong>$nr</strong> times in the document</p>";
+        display_search_results($word, $nr);
     }
+}
+
+function transform_lowercase($content){
+    $lowercase_content = strtolower($content);
+    return $lowercase_content;
+}
+
+function display_search_results($word, $nr){
+    echo "<p><strong>$word</strong> appears <strong>$nr</strong> times in the document</p>";
 }
