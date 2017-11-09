@@ -75,8 +75,13 @@ try {
         $pdo->exec($sqlCustomer);
         echo "New customer record created successfully for customer ID <strong>$id</strong> // ";
 
-        $pdo->exec($sqlAddress);
-        echo "New address record creation also successfully for this customer. <br>";
+        if (isset($id_address)) {
+            $pdo->exec($sqlAddress);
+            echo "New address record creation also successfully for this customer.<br>";
+        }
+        else {
+            echo "Shipping address <strong>UNAVAILABLE</strong> for customer ID <strong>$id</strong>.<br>";
+        }
     }
 }
 
